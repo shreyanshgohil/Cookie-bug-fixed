@@ -24,12 +24,11 @@ app.use(
   session({
     secret: "DDSDKSDMKDMSKMDD",
     proxy:true,
-    saveUninitialized: false,
     store,
     cookie: {
       path:'/',
       secure: true,
-      httpOnly: false,
+      httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
       sameSite: "none",
     },
@@ -38,9 +37,9 @@ app.use(
 
 app.post("/hello-wrold", (req, res, next) => {
   req.session.accessToken = Math.random().toString();
-  res.json({ Done: "Hello from shreyansh gohil" });
+  res.json({ Done: "Hello from shreyansh gohilllllllllll" });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is started on port ${process.env.PORT}`);
+app.listen(5000, () => {
+  console.log(`Server is started on port 5000`);
 });

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: back
+  template:
+    metadata:
+      labels:
+        component: back
+    spec:
+      containers:
+        - name: front
+          image: shreyanshgohil2510/back
+          ports:
+            - containerPort: 5000

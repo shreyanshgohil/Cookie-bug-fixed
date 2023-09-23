@@ -3,16 +3,13 @@ import cors from "cors";
 import { config } from "dotenv";
 import express from "express";
 import session from "express-session";
-import cookieParser from 'cookie-parser';
-
+import cookieParser from "cookie-parser";
 
 config();
 const app = express();
 const MongoDbStore = MongoDBSession(session);
 app.use(express.json());
-app.set('trust proxy', 1);
 app.use(cors({ credentials: true, origin: process.env.ORIGIN }));
-
 
 const store = new MongoDbStore({
   uri: "mongodb+srv://shreyansh:fK2OXSG2gwFJiYfp@cluster0.q1f2mq0.mongodb.net/",
@@ -23,10 +20,10 @@ app.use(cookieParser());
 app.use(
   session({
     secret: "DDSDKSDMKDMSKMDD",
-    proxy:true,
+    proxy: true,
     store,
     cookie: {
-      path:'/',
+      path: "/",
       secure: true,
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
@@ -37,7 +34,15 @@ app.use(
 
 app.post("/hello-wrold", (req, res, next) => {
   req.session.accessToken = Math.random().toString();
-  res.json({ Done: "Hello from shreyansh gohilllllllllll" });
+  res
+    // .cookie("Hello", "world", {
+    //   path: "/",
+    //   secure: true,
+    //   httpOnly: true,
+    //   maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
+    //   sameSite: "none",
+    // })
+    .json({ Done: "New response" });
 });
 
 app.listen(5000, () => {
